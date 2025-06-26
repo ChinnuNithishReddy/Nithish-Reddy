@@ -1,26 +1,128 @@
-CREATE TABLE Customers (
-    CustomerID INT PRIMARY KEY,
-    FirstName VARCHAR(50),
-    LastName VARCHAR(50),
-    Email VARCHAR(100) UNIQUE,
-    PhoneNumber VARCHAR(15),
-    City VARCHAR(50),
-    State VARCHAR(50),
-    ZipCode VARCHAR(10),
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-SQL> INSERT INTO Customers (
-  2      CustomerID,FirstName, LastName, Email, PhoneNumber, City, State, ZipCode
-  3  ) VALUES
-  4  (6,'Kiran', 'Kumar', 'kiran.kumar@gmail.com', '5432109876', 'Bengaluru', 'Karnataka', '560001');
-  CREATE TABLE Orders (
-    OrderID INT PRIMARY KEY,
-    CustomerID INT,
-    OrderDate DATE,
-    TotalAmount DECIMAL(10, 2),
-    Status VARCHAR(50),
-    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
-);
-SQL> INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount, Status)
-  2  VALUES (105, 4, DATE '2025-06-21', 4099.99, 'Cancelled');
-  
+create table city (
+  2  cid int not null,
+  3  cityname varchar(20),
+  4  primary key (cid));
+
+Table created.
+
+
+SQL>  insert into city (cid,cityname)
+  2   values
+  3    (1,'hyderabad');
+
+1 row created.
+
+SQL>  insert into city (cid,cityname)
+  2   values
+  3    (2,'mumbai');
+
+1 row created.
+
+SQL>  insert into city (cid,cityname)
+  2   values
+  3    (3,'delhi');
+
+1 row created.
+
+SQL>  insert into city (cid,cityname)
+  2   values
+  3    (4,'kolkata');
+
+1 row created.
+
+SQL>  insert into city (cid,cityname)
+  2   values
+  3    (5,'bangalore');
+
+1 row created. 
+
+SQL>  insert into city (cid,cityname)
+  2   values
+  3    (6,'chennai');
+
+1 row created.
+
+SQL> select * from city;
+
+       CID		 CITYNAME
+    ---------- 	--------------------
+         1		 hyderabad
+         2 		mumbai
+         3 		delhi
+         4 		kolkata
+         5 		bangalore
+         6 		chennai
+
+6 rows selected.
+
+SQL> create table customer (id int not null,
+  2  fristname varchar (20),
+  3  lastname varchar (20),
+  4  city int not null,
+  5  primary key (id),
+  6  foreign key (city) references city (cid));
+
+Table created. SQL> insert into customer (id, fristname, lastname, city)
+  2  values
+  3  (101,'chinnu','reddy',1);
+
+1 row created. SQL> insert into customer (id, fristname, lastname, city)
+  2  values
+  3  (103,'ajay','rathore',6);
+
+1 row created.
+
+SQL> insert into customer (id, fristname, lastname, city)
+  2  values
+  3    (104,'Rohit','Sinha',6);
+
+1 row created.
+
+SQL> insert into customer (id, fristname, lastname, city)
+  2  values
+  3    (105,'Akash','Verma',1);
+
+1 row created.
+
+SQL> insert into customer (id, fristname, lastname, city)
+  2  values
+  3    (106,'Abhishek','Gupta',3);
+
+1 row created.
+
+SQL> insert into customer (id, fristname, lastname, city)
+  2  values
+  3    (107,'Rishav','Pal',5);
+
+1 row created.
+
+SQL> insert into customer (id, fristname, lastname, city)
+  2  values
+  3    (108,'Sakshi','Sinha',2);
+
+1 row created.
+
+SQL> insert into customer (id, fristname, lastname, city)
+  2  values
+  3    (109,'john','doe',4);
+
+1 row created.
+
+SQL> select * from customer;
+
+        ID              FRISTNAME              LASTNAME                   CITY
+   ----------      --------------------        --------------------             ------------
+       101	 chinnu              	 reddy                         1
+       102	 hari                 		reddy                          2
+       103	 ajay                 		rathore                       6
+       104	 Rohit                		Sinha                          6
+       105 	Akash                	Verma                         1
+       106 	Abhishek          		   Gupta                       3
+       107 	Rishav               		Pal                                5
+       108 	Sakshi               		Sinha                           2
+       109 	john                 		doe                             4
+
+9 rows selected.
+
+SQL>
+
