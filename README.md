@@ -173,3 +173,118 @@ SQL> select * from customer;
 9 rows selected.
 
 SQL>
+
+SQL> SELECT * FROM Customer
+  2  WHERE City = 1;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       105 Akash                Verma                         1
+       101 chinnu               reddy                         1
+       SQL> select * from customer where city = 2;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       108 Sakshi               Sinha                         2
+       102 hari                 reddy                         2
+
+SQL> select * from customer where city = 5;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       107 Rishav               Pal                           5
+
+SQL> select * from customer where city = 6;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       104 Rohit                Sinha                         6
+       103 ajay                 rathore                       6
+
+SQL> select * from customer where city = 1;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       105 Akash                Verma                         1
+       101 chinnu               reddy                         1
+
+SQL>
+
+SQL> SELECT * FROM Customer
+  2  WHERE City = 1 AND LastName = 'reddy';
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       101 chinnu               reddy                         1
+       SQL> select * from customer where city = 2 and lastname = 'reddy';
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       102 hari                 reddy                         2
+       
+SQL> select * from customer where city = 5 and lastname = 'Pal';
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       107 Rishav               Pal                           5
+
+
+SQL> SELECT * FROM Customer
+  2  WHERE City = 1 OR City = 2;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       105 Akash                Verma                         1
+       108 Sakshi               Sinha                         2
+       101 chinnu               reddy                         1
+       102 hari                 reddy                         2
+
+       
+SQL> select * from customer where city =3 or city = 5;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       106 Abhishek             Gupta                         3
+       107 Rishav               Pal                           5
+
+SQL> select * from customer where city =2 or city = 6;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       104 Rohit                Sinha                         6
+       108 Sakshi               Sinha                         2
+       103 ajay                 rathore                       6
+       102 hari                 reddy                         2
+
+SQL> select * from customer where city =1 or city = 4;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       105 Akash                Verma                         1
+       109 john                 doe                           4
+       101 chinnu               reddy                         1
+
+SQL> SELECT * FROM Customer
+  2  WHERE ID BETWEEN 103 AND 106;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       104 Rohit                Sinha                         6
+       105 Akash                Verma                         1
+       106 Abhishek             Gupta                         3
+       103 ajay                 rathore                       6
+
+SQL> SELECT * FROM Customer
+  2  WHERE ID BETWEEN 101 AND 106;
+
+        ID FRISTNAME            LASTNAME                   CITY
+---------- -------------------- -------------------- ----------
+       104 Rohit                Sinha                         6
+       105 Akash                Verma                         1
+       106 Abhishek             Gupta                         3
+       101 chinnu               reddy                         1
+       103 ajay                 rathore                       6
+       102 hari                 reddy                         2
+
+6 rows selected.
+
