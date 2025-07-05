@@ -62,11 +62,20 @@ SQL> create table customer (id int not null,
   5  primary key (id),
   6  foreign key (city) references city (cid));
 
-Table created. SQL> insert into customer (id, fristname, lastname, city)
+Table created.
+SQL> insert into customer (id, fristname, lastname, city)
   2  values
   3  (101,'chinnu','reddy',1);
+  
+  1 row created.
+  
+  SQL> insert into customer (id, fristname, lastname, city) 
+  2 values 
+  3 (102,'hari','reddy',2);
+  
+1 row created.
 
-1 row created. SQL> insert into customer (id, fristname, lastname, city)
+SQL> insert into customer (id, fristname, lastname, city)
   2  values
   3  (103,'ajay','rathore',6);
 
