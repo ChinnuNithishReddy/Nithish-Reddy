@@ -639,3 +639,191 @@ SQL> SELECT *
 ---------- -------------------- -------------------- ----------
        102 hari                 reddy                         2
        108 Sakshi               Sinha                         2
+
+
+
+
+       SQL> CREATE TABLE Customers (
+  2       CustomerID INTEGER PRIMARY KEY,
+  3       FirstName varchar(20),
+  4       LastName varchar(20),
+  5       City varchar(20)
+  6  );
+
+Table created.
+
+SQL> INSERT INTO Customers VALUES (1, 'John', 'Doe', 'New York');
+
+1 row created.
+
+SQL> INSERT INTO Customers VALUES (2, 'Jane', 'Smith', 'Los Angeles');
+
+1 row created.
+
+SQL> INSERT INTO Customers VALUES (3, 'Mike', 'Brown', 'Chicago');
+
+1 row created.
+SQL> INSERT INTO Customers VALUES (4, 'Sara', 'Wilson', 'Houston');
+
+1 row created.
+
+SQL> INSERT INTO Customers VALUES (5, 'David', 'Lee', 'San Francisco');
+
+1 row created.
+
+SQL> INSERT INTO Customers VALUES (6, 'Emily', 'Clark', 'Seattle');
+
+1 row created.
+
+SQL> INSERT INTO Customers VALUES (7, 'Robert', 'Taylor', 'Miami');
+
+1 row created.
+
+SQL> INSERT INTO Customers VALUES (8, 'Sophia', 'Anderson', 'Boston');
+
+1 row created.
+SQL> select * from Customers;
+
+CUSTOMERID FIRSTNAME            LASTNAME             CITY
+---------- -------------------- -------------------- --------------------
+         1 John                 Doe                  New York
+         2 Jane                 Smith                Los Angeles
+         3 Mike                 Brown                Chicago
+         4 Sara                 Wilson               Houston
+         5 David                Lee                  San Francisco
+         6 Emily                Clark                Seattle
+         7 Robert               Taylor               Miami
+         8 Sophia               Anderson             Boston
+
+8 rows selected.
+
+CREATE TABLE Orders (
+    OrderID INTEGER PRIMARY KEY,
+    CustomerID INTEGER,
+    OrderDate varchar(20),
+    Amount REAL,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+Table created.
+
+SQL> INSERT INTO Orders VALUES (101, 1, '2024-01-10', 250.00);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (102, 1, '2024-03-15', 450.00);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (103, 2, '2024-02-20', 300.00);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (104, 2, '2024-03-25', 275.00);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (105, 3, '2024-04-05', 500.00);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (106, 4, '2024-04-18', 150.00);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (107, 5, '2024-05-01', 700.00);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (108, 5, '2024-05-20', 650.00);
+
+1 row created.
+
+SQL> select * from Orders;
+
+   ORDERID CUSTOMERID ORDERDATE                AMOUNT
+---------- ---------- -------------------- ----------
+       101          1 2024-01-10                  250
+       102          1 2024-03-15                  450
+       103          2 2024-02-20                  300
+       104          2 2024-03-25                  275
+       105          3 2024-04-05                  500
+       106          4 2024-04-18                  150
+       107          5 2024-05-01                  700
+       108          5 2024-05-20                  650
+
+8 rows selected.
+SQL> CREATE VIEW CustomerFullName AS
+  2  SELECT CustomerID, FirstName || ' ' || LastName AS FullName, City
+  3  FROM Customers;
+
+View created.
+
+SQL> CREATE VIEW OrderDetails AS
+  2  SELECT
+  3      Orders.OrderID,
+  4      Customers.FirstName || ' ' || Customers.LastName AS CustomerName,
+  5      Orders.OrderDate,
+  6      Orders.Amount
+  7  FROM Orders
+  8  JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+
+View created.
+SQL> SELECT * FROM CustomerFullName;
+
+CUSTOMERID FULLNAME                                  CITY
+---------- ----------------------------------------- --------------------
+         1 John Doe                                  New York
+         2 Jane Smith                                Los Angeles
+         3 Mike Brown                                Chicago
+         4 Sara Wilson                               Houston
+         5 David Lee                                 San Francisco
+         6 Emily Clark                               Seattle
+         7 Robert Taylor                             Miami
+         8 Sophia Anderson                           Boston
+
+8 rows selected.
+
+SQL> SELECT * FROM OrderDetails WHERE Amount > 300;
+
+   ORDERID CUSTOMERNAME                              ORDERDATE
+---------- ----------------------------------------- --------------------
+    AMOUNT
+----------
+       102 John Doe                                  2024-03-15
+       450
+
+       105 Mike Brown                                2024-04-05
+       500
+
+       107 David Lee                                 2024-05-01
+       700
+
+
+   ORDERID CUSTOMERNAME                              ORDERDATE
+---------- ----------------------------------------- --------------------
+    AMOUNT
+----------
+       108 David Lee                                 2024-05-20
+       650
+
+SQL> CREATE VIEW SimpleCustomerView AS
+  2  SELECT CustomerID, City
+  3  FROM Customers;
+
+View created.
+
+SQL> UPDATE SimpleCustomerView
+  2  SET City = 'San Francisco'
+  3  WHERE CustomerID = 2;
+
+1 row updated.
+
+SQL> DROP VIEW OrderDetails;
+
+View dropped.
+
+SQL> DROP VIEW CustomerFullName;
+
+View dropped.
+
+
