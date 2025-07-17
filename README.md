@@ -768,6 +768,7 @@ SQL> CREATE VIEW OrderDetails AS
   8  JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
 
 View created.
+
 SQL> SELECT * FROM CustomerFullName;
 
 CUSTOMERID FULLNAME                                  CITY
@@ -822,8 +823,277 @@ SQL> DROP VIEW OrderDetails;
 
 View dropped.
 
+
 SQL> DROP VIEW CustomerFullName;
 
 View dropped.
 
+ALL PROGRAMS 
 
+
+SQL> CREATE TABLE customers1 (
+    CustomerID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100),
+    Phone VARCHAR(20),
+    Address VARCHAR(255)
+);
+
+Table created.
+
+SQL> INSERT INTO customers1 (CustomerID, FirstName, LastName, Email, Phone, Address) VALUES(1, 'John', 'Doe', 'john@gmail.com', '1234567890', '123 Main St'),
+
+1 row created.
+
+SQL> INSERT INTO customers1 (CustomerID, FirstName, LastName, Email, Phone, Address) VALUES(2, 'Alice', 'Smith', 'alice@gmai.com', '2345678901', '456 Elm St');
+1 row created.
+
+SQL> INSERT INTO customers1 (CustomerID, FirstName, LastName, Email, Phone, Address) VALUES (3, 'Michael', 'Johnson', 'michael@gmai.com', '3456789012', '789 Pine St');
+
+1 row created.
+
+SQL> INSERT INTO customers1 (CustomerID, FirstName, LastName, Email, Phone, Address) VALUES (4, 'Emma', 'Brown', 'emma@gmai.com', '4567890123', '321 Oak St');
+
+1 row created.
+
+SQL> INSERT INTO customers1 (CustomerID, FirstName, LastName, Email, Phone, Address) VALUES (5, 'David', 'Lee', 'david@gmai.com', '5678901234', '654 Maple St');
+
+1 row created.
+
+SQL> select * from customers1;
+
+CUSTOMERID       FIRSTNAME          LASTNAME              EMAIL                    PHONE                            ADDRESS
+----------     -------------    ---------------   -----------------------     --------------------          --------------------
+     1            John               Doe             john@gmail.com            9234567890                      123 Main St
+
+     2            Alice              Smith           alice@gmail.com           9345678901                      456 Elm St
+
+     3            Michael            Johnson         michael@gmail.com         9456789012                      789 Pine St
+
+     4            Emma               Brown           emma@gmail.com            9567890123                      321 Oak St
+
+     5            David              Lee             david@gmail.com           9678901234                      654 Maple St
+
+
+SQL> CREATE TABLE products1 (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10,2),
+    StockQuantity INT
+);
+
+Table created.
+
+SQL> INSERT INTO products1 (ProductID, ProductName, Category, Price, StockQuantity) VALUES (1, 'Laptop', 'Electronics', 75000, 20);
+
+1 row created.
+
+SQL> INSERT INTO products1 (ProductID, ProductName, Category, Price, StockQuantity) VALUES (2, 'Mouse', 'Electronics', 500, 100);
+
+1 row created.
+
+SQL> INSERT INTO products1 (ProductID, ProductName, Category, Price, StockQuantity) VALUES (3, 'Speaker', 'Electronic', 2500, 300);
+
+1 row created.
+
+SQL> INSERT INTO products1 (ProductID, ProductName, Category, Price, StockQuantity) VALUES (4, 'Desk', 'Furniture', 5500, 30);
+
+1 row created.
+
+SQL> INSERT INTO products1 (ProductID, ProductName, Category, Price, StockQuantity) VALUES (5, 'Monitor', 'Electronics', 15000, 25);
+
+1 row created.
+
+SQL> INSERT INTO products1 (ProductID, ProductName, Category, Price, StockQuantity) VALUES (6, 'Keyboard', 'Electronics', 1500, 70);
+
+1 row created.
+
+SQL> select * from products1;
+
+     PRODUCTID     PRODUCTNAME                     CATEGORY              PRICE         STOCKQUANTITY
+    ----------    -------------------     --------------------------- ------------     ----------------
+         1         Laptop                      Electronics              75000            20
+         2         Mouse                       Electronics              500              100
+         3         speaker                     Electronics              2500             300
+         4         Desk                        Furniture                5500             30
+         5         Monitor                     Electronics              15000            25
+         6         Keyboard                    Electronics              1500             70
+  
+6 rows selected.
+
+
+SQL> CREATE TABLE orders1 (
+    OrderID INT PRIMARY KEYT,
+    OrderDate DATE,
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES customers1(CustomerID)
+);
+
+Table created.
+
+SQL> INSERT INTO orders1 (OrderID, OrderDate, CustomerID) VALUES (1, TO_DATE('2025-07-01', 'YYYY-MM-DD'), 1);
+
+1 row created.
+
+SQL> INSERT INTO orders1 (OrderID, OrderDate, CustomerID) VALUES (2, TO_DATE('2025-07-02', 'YYYY-MM-DD'), 2);
+
+1 row created.
+
+SQL> INSERT INTO orders1 (OrderID, OrderDate, CustomerID) VALUES (3, TO_DATE('2025-07-03', 'YYYY-MM-DD'), 3);
+
+1 row created.
+
+SQL>  INTO orders1 (OrderID, OrderDate, CustomerID) VALUES (4, TO_DATE('2025-07-04', 'YYYY-MM-DD'), 4);
+
+1 row created.
+
+SQL> INSERT INTO orders1 (OrderID, OrderDate, CustomerID) VALUES (5, TO_DATE('2025-07-05', 'YYYY-MM-DD'), 5);
+
+1 row created.
+
+SQL> select * from orders1;
+
+   ORDERID       ORDERDATE   CUSTOMERID
+----------     -----------  ------------
+    1           01-JUL-25        1
+    2           02-JUL-25        2
+    3           03-JUL-25        3
+    4           04-JUL-25        4
+    5           05-JUL-25        5
+
+
+SQL> CREATE TABLE payments (
+    PaymentID INT PRIMARY KEY,
+    OrderID INT,
+    PaymentDate DATE,
+    Amount DECIMAL(10,2),
+    PaymentMethod VARCHAR(50),
+    FOREIGN KEY (OrderID) REFERENCES orders1(OrderID)
+);
+
+Table created.
+
+SQL> INSERT INTO payments (PaymentID, OrderID, PaymentDate, Amount, PaymentMethod) VALUES (1, 1, TO_DATE('2025-07-01', 'YYYY-MM-DD'), 76000, 'Credit Card');
+
+1 row created.
+
+SQL> INSERT INTO payments (PaymentID, OrderID, PaymentDate, Amount, PaymentMethod) VALUES (2, 2, TO_DATE('2025-07-02', 'YYYY-MM-DD'), 3500, 'UPI');
+
+1 row created.
+
+SQL> INSERT INTO payments (PaymentID, OrderID, PaymentDate, Amount, PaymentMethod) VALUES (3, 3, TO_DATE('2025-07-03', 'YYYY-MM-DD'), 16500, 'Debit Card');
+
+1 row created.
+
+SQL> INSERT INTO payments (PaymentID, OrderID, PaymentDate, Amount, PaymentMethod) VALUES (4, 4, TO_DATE('2025-07-04', 'YYYY-MM-DD'), 6000, 'UPI');
+
+1 row created.
+
+SQL> INSERT INTO payments (PaymentID, OrderID, PaymentDate, Amount, PaymentMethod) VALUES (5, 5, TO_DATE('2025-07-05', 'YYYY-MM-DD'), 90000, 'Credit Card');
+
+1 row created.
+
+SQL> select * from payments;
+
+ PAYMENTID    ORDERID     PAYMENTDA         AMOUNT       PAYMENTMETHOD
+---------- ----------   -------------   ------------- ---------------------
+    1          1         01-JUL-25        76000         Credit Card
+    2          2         02-JUL-25        3500          UPI
+    3          3         03-JUL-25        16500         Debit Card
+    4          4         04-JUL-25        6000          UPI
+    5          5         05-JUL-25        90000         Credit Card
+
+
+SQL> CREATE TABLE order_details (
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    Subtotal DECIMAL(10,2),
+    PRIMARY KEY (OrderID, ProductID),
+    FOREIGN KEY (OrderID) REFERENCES orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES products(ProductID)
+);
+
+Table created.
+
+SQL> INSERT INTO order_details (OrderID, ProductID, Quantity, Subtotal) VALUES (1, 1, 1, 75000);
+
+1 row created.
+
+SQL> INSERT INTO order_details (OrderID, ProductID, Quantity, Subtotal) VALUES (1, 2, 2, 1000);
+
+1 row created.
+
+SQL> INSERT INTO order_details (OrderID, ProductID, Quantity, Subtotal) VALUES (2, 5, 1, 15000);
+
+1 row created.
+
+SQL> INSERT INTO order_details (OrderID, ProductID, Quantity, Subtotal) VALUES (3, 6, 1, 1500);
+
+1 row created.
+
+SQL> INSERT INTO order_details (OrderID, ProductID, Quantity, Subtotal) VALUES (4, 4, 1, 5500);
+
+1 row created.
+
+SQL> INSERT INTO order_details (OrderID, ProductID, Quantity, Subtotal) VALUES (4, 2, 1, 500);
+
+1 row created.
+
+SQL> INSERT INTO order_details (OrderID, ProductID, Quantity, Subtotal) VALUES (5, 1, 1, 75000);
+
+1 row created.
+
+SQL> INSERT INTO order_details (OrderID, ProductID, Quantity, Subtotal) VALUES (5, 5, 1, 15000);
+
+1 row created.
+
+SQL> select * from order_details;
+
+   ORDERID  PRODUCTID   QUANTITY   SUBTOTAL
+---------- ---------- ---------- ----------
+         1          1          1      75000
+         1          2          2       1000
+         2          5          1      15000
+         3          6          1       1500
+         4          4          1       5500
+         4          2          1        500
+         5          1          1      75000
+         5          5          1      15000
+
+8 rows selected.
+
+SQL> SELECT 
+    o.OrderID,
+    c.FirstName,
+    c.LastName,
+    o.OrderDate,
+    SUM(od.Subtotal) AS TotalAmount,
+    p.PaymentMethod,
+    p.PaymentDate
+FROM orders1 o
+JOIN customers1 c ON o.CustomerID = c.CustomerID
+JOIN order_details od ON o.OrderID = od.OrderID
+JOIN payments p ON o.OrderID = p.OrderID
+GROUP BY o.OrderID, c.FirstName, c.LastName, o.OrderDate, p.PaymentMethod, p.PaymentDate;
+
+SQL> CREATE VIEW sales_report AS
+SELECT 
+    o.OrderID,
+    c.FirstName,
+    c.LastName,
+    o.OrderDate,
+    pr.ProductName,
+    od.Quantity,
+    od.Subtotal,
+    p.PaymentMethod,
+    p.PaymentDate
+FROM orders1 o
+JOIN customers1 c ON o.CustomerID = c.CustomerID
+JOIN order_details od ON o.OrderID = od.OrderID
+JOIN products1 pr ON od.ProductID = pr.ProductID
+JOIN payments p ON o.OrderID = p.OrderID;
+
+View created.
