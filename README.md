@@ -1097,3 +1097,144 @@ JOIN products1 pr ON od.ProductID = pr.ProductID
 JOIN payments p ON o.OrderID = p.OrderID;
 
 View created.
+
+
+
+
+SQL> CREATE TABLE Students (
+    StudentID NUMBER PRIMARY KEY,
+    FirstName VARCHAR2(50),
+    LastName VARCHAR2(50),
+    Gender CHAR(1),
+    DOB DATE,
+    Department VARCHAR2(50),
+    AdmissionYear NUMBER
+);
+
+Table created.
+
+
+SQL> INSERT INTO Students VALUES (101, 'John', 'Doe', 'M', TO_DATE('2002-05-12','YYYY-MM-DD'), 'CSE', 2021);
+
+1 row created.
+
+SQL> INSERT INTO Students VALUES (102, 'Alice', 'Smith', 'F', TO_DATE('2003-03-15','YYYY-MM-DD'), 'ECE', 2021);
+
+1 row created.
+
+SQL> INSERT INTO Students VALUES (103, 'Ravi', 'Kumar', 'M', TO_DATE('2002-08-21','YYYY-MM-DD'), 'EEE', 2021);
+
+1 row created.
+
+SQL> INSERT INTO Students VALUES (104, 'Priya', 'Sharma', 'F', TO_DATE('2003-11-05','YYYY-MM-DD'), 'MECH', 2021);
+
+1 row created.
+
+SQL> INSERT INTO Students VALUES (105, 'Aman', 'Verma', 'M', TO_DATE('2002-07-19','YYYY-MM-DD'), 'CSE', 2021);
+
+1 row created.
+
+SQL> INSERT INTO Students VALUES (106, 'Sneha', 'Reddy', 'F', TO_DATE('2003-04-12','YYYY-MM-DD'), 'ECE', 2021);
+
+1 row created.
+
+
+
+SQL> CREATE TABLE Courses (
+    CourseID NUMBER PRIMARY KEY,
+    CourseCode VARCHAR2(10),
+    CourseName VARCHAR2(100),
+    Credits NUMBER,
+    Department VARCHAR2(50)
+);
+
+Table created.
+
+
+
+SQL> INSERT INTO Courses VALUES (201, 'CS101', 'Data Structures', 4, 'CSE');
+
+1 row created.
+
+SQL> INSERT INTO Courses VALUES (202, 'CS102', 'DBMS', 4, 'CSE');
+
+1 row created.
+
+SQL> INSERT INTO Courses VALUES (203, 'CS103', 'Operating Systems', 4, 'CSE');
+
+1 row created.
+
+SQL> INSERT INTO Courses VALUES (204, 'EE101', 'Basic Electrical', 3, 'EEE');
+
+1 row created.
+
+SQL> INSERT INTO Courses VALUES (205, 'ME101', 'Thermodynamics', 3, 'MECH');
+
+1 row created.
+
+SQL> INSERT INTO Courses VALUES (206, 'EC101', 'Digital Electronics', 3, 'ECE');
+
+1 row created.
+
+
+
+SQL> CREATE TABLE Semesters (
+    SemesterID NUMBER PRIMARY KEY,
+    SemesterName VARCHAR2(20),
+    StartDate DATE,
+    EndDate DATE
+);
+
+Table created.
+
+
+SQL> INSERT INTO Semesters VALUES (301, 'Sem1-2024', TO_DATE('2024-01-01','YYYY-MM-DD'), TO_DATE('2023-06-01','YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Semesters VALUES (302, 'Sem2-2024', TO_DATE('2024-07-01','YYYY-MM-DD'), TO_DATE('2023-06-01','YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Semesters VALUES (303, 'Sem1-2023', TO_DATE('2023-01-01','YYYY-MM-DD'), TO_DATE('2023-06-01','YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Semesters VALUES (304, 'Sem2-2023', TO_DATE('2023-07-01','YYYY-MM-DD'), TO_DATE('2023-12-01','YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Semesters VALUES (305, 'Sem1-2025', TO_DATE('2025-01-01','YYYY-MM-DD'), TO_DATE('2025-06-01','YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Semesters VALUES (306, 'Sem2-2025', TO_DATE('2025-07-01','YYYY-MM-DD'), TO_DATE('2025-12-01','YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Semesters VALUES (307, 'Sem1-2022', TO_DATE('2022-01-01','YYYY-MM-DD'), TO_DATE('2022-06-01','YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Semesters VALUES (308, 'Sem2-2022', TO_DATE('2022-07-01','YYYY-MM-DD'), TO_DATE('2022-12-01','YYYY-MM-DD'));
+
+1 row created.
+
+
+
+SQL> CREATE TABLE Grades (
+    GradeID NUMBER PRIMARY KEY,
+    StudentID NUMBER,
+    CourseID NUMBER,
+    SemesterID NUMBER,
+    Marks NUMBER,
+    Grade CHAR(2),
+    GPA NUMBER(3,1),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID),
+    FOREIGN KEY (SemesterID) REFERENCES Semesters(SemesterID)
+);  
+
+Table created.
+
+
